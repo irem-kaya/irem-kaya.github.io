@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İrem Nur Kaya — Product & Tech</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0d0f0e;
+  --surface: #131615;
+  --card: #191c1b;
+  --border: #232825;
+  --text: #e8ede9;
+  --muted: #5a6b5e;
+  --muted2: #3a4a3d;
+  --green: #00e676;
+  --green-dim: rgba(0,230,118,0.08);
+  --green-mid: rgba(0,230,118,0.15);
+  --font-display: 'Syne', sans-serif;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--font-sans); font-size: 16px; line-height: 1.65; overflow-x: hidden; }
+::selection { background: var(--green); color: #0d0f0e; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--muted2); border-radius: 2px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  border-bottom: 1px solid var(--border);
+  background: rgba(13,15,14,0.92);
+  backdrop-filter: blur(20px);
+}
+nav .inner { max-width: 1100px; margin: 0 auto; padding: 0 40px; display: flex; justify-content: space-between; align-items: center; height: 56px; }
+.nav-logo { font-family: var(--font-mono); font-size: 13px; color: var(--green); letter-spacing: 0.5px; }
+.nav-logo span { color: var(--muted); }
+.nav-links { display: flex; gap: 36px; }
+.nav-links a { font-size: 12px; font-weight: 500; color: var(--muted); text-decoration: none; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+
+/* ── WRAP ── */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+/* ── HERO ── */
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding-top: 56px; }
+.hero-left { }
+.hero-eyebrow { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--green); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.7s 0.1s forwards; }
+.hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--green); }
+.hero-name { font-family: var(--font-display); font-size: clamp(52px, 6vw, 86px); font-weight: 800; line-height: 0.95; letter-spacing: -2px; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.7s 0.2s forwards; }
+.hero-name .line2 { color: var(--green); display: block; font-style: italic; }
+.hero-desc { font-size: 16px; color: var(--muted); line-height: 1.8; max-width: 440px; margin-bottom: 40px; font-weight: 300; opacity: 0; animation: fadeUp 0.7s 0.35s forwards; }
+.hero-desc em { font-style: italic; color: #a0b8a4; }
+.hero-btns { display: flex; gap: 14px; opacity: 0; animation: fadeUp 0.7s 0.45s forwards; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; font-family: var(--font-display); font-size: 13px; font-weight: 700; text-decoration: none; letter-spacing: 0.5px; transition: all 0.2s; cursor: pointer; border: none; }
+.btn-primary { background: var(--green); color: #0d0f0e; }
+.btn-primary:hover { background: #33eb8e; transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.btn-ghost:hover { border-color: var(--green); color: var(--green); }
+
+/* Terminal card */
+.hero-right { opacity: 0; animation: fadeUp 0.7s 0.5s forwards; }
+.terminal { background: #1a1f1b; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 32px 64px rgba(0,0,0,0.5); }
+.term-bar { background: #252a26; padding: 14px 18px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
+.term-dot { width: 12px; height: 12px; border-radius: 50%; }
+.term-dot.r { background: #ff5f57; }
+.term-dot.y { background: #febc2e; }
+.term-dot.g { background: #28c840; }
+.term-title { font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin-left: 8px; }
+.term-body { padding: 28px 24px; font-family: var(--font-mono); font-size: 13px; line-height: 2; }
+.term-prompt { color: var(--green); }
+.term-cmd { color: var(--text); }
+.term-key { color: #79b8ff; }
+.term-val { color: #f6c90e; }
+.term-str { color: #9dec9d; }
+.term-num { color: #f78c6c; }
+.term-cursor { display: inline-block; width: 8px; height: 14px; background: var(--green); animation: blink-cursor 1.2s infinite; vertical-align: middle; margin-left: 2px; }
+@keyframes blink-cursor { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+
+/* ── MARQUEE ── */
+.marquee-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 16px 0; background: var(--surface); }
+.marquee-track { display: flex; width: max-content; animation: marquee 35s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+.marquee-item { display: flex; align-items: center; gap: 24px; padding: 0 36px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; letter-spacing: 0.5px; }
+.marquee-item strong { color: var(--green); font-weight: 500; }
+.marquee-sep { color: var(--muted2); }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── SECTIONS ── */
+section { padding: 80px 0; }
+.sec-header { margin-bottom: 56px; }
+.sec-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--green); margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+.sec-label::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 48px; }
+.sec-title { font-family: var(--font-display); font-size: clamp(32px, 4vw, 52px); font-weight: 800; letter-spacing: -1.5px; line-height: 1; }
+.sec-title em { font-style: italic; color: var(--green); }
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.about-p { font-size: 15px; color: #7a8f7e; line-height: 1.85; margin-bottom: 18px; font-weight: 300; }
+.about-p strong { color: var(--text); font-weight: 500; }
+.stats { display: flex; flex-direction: column; gap: 2px; }
+.stat-row { background: var(--card); border: 1px solid var(--border); padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; transition: border-color 0.2s; }
+.stat-row:hover { border-color: var(--green); }
+.stat-n { font-family: var(--font-display); font-size: 40px; font-weight: 800; color: var(--green); letter-spacing: -2px; line-height: 1; }
+.stat-l { font-size: 12px; color: var(--muted); text-align: right; line-height: 1.5; font-weight: 300; max-width: 160px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+.chip { font-family: var(--font-mono); font-size: 11px; padding: 5px 12px; border: 1px solid var(--border); color: var(--muted); background: var(--card); transition: border-color 0.2s, color 0.2s; letter-spacing: 0.3px; }
+.chip:hover { border-color: var(--green); color: var(--green); }
+
+/* ── EXPERIENCE ── */
+.tab-ctrl { display: flex; gap: 2px; margin-bottom: 40px; }
+.tab-btn { padding: 10px 24px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; background: var(--card); border: 1px solid var(--border); color: var(--muted); transition: all 0.2s; }
+.tab-btn.active { background: var(--green); color: #0d0f0e; border-color: var(--green); font-weight: 700; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+.tl { display: flex; flex-direction: column; }
+.tl-row { display: grid; grid-template-columns: 140px 1fr; gap: 32px; padding: 32px 0; border-bottom: 1px solid var(--border); position: relative; }
+.tl-row:first-child { padding-top: 0; }
+.tl-row:last-child { border-bottom: none; padding-bottom: 0; }
+.tl-when { font-family: var(--font-mono); font-size: 10px; color: var(--muted); padding-top: 3px; line-height: 1.7; letter-spacing: 0.3px; }
+.tl-role { font-family: var(--font-display); font-weight: 700; font-size: 18px; margin-bottom: 4px; letter-spacing: -0.3px; }
+.tl-org { font-family: var(--font-mono); font-size: 12px; color: var(--green); margin-bottom: 12px; letter-spacing: 0.3px; }
+.tl-body { font-size: 14px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+
+/* ── PROJECTS ── */
+.speed-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+.speed-ctrl { display: flex; gap: 2px; }
+.speed-btn { padding: 7px 18px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; background: var(--card); border: 1px solid var(--border); color: var(--muted); transition: all 0.2s; }
+.speed-btn.active { background: var(--green); color: #0d0f0e; border-color: var(--green); }
+.proj-scroll-wrap { overflow: hidden; position: relative; }
+.proj-scroll-wrap::before, .proj-scroll-wrap::after { content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none; }
+.proj-scroll-wrap::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+.proj-scroll-wrap::after { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+.proj-scroll-track { display: flex; gap: 16px; width: max-content; padding: 4px 0 16px; animation: projScroll 32s linear infinite; }
+.proj-scroll-track:hover { animation-play-state: paused; }
+.proj-scroll-track.slow { animation-duration: 60s; }
+.proj-scroll-track.medium { animation-duration: 32s; }
+.proj-scroll-track.fast { animation-duration: 16s; }
+@keyframes projScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.proj-card { width: 320px; flex-shrink: 0; background: var(--card); border: 1px solid var(--border); padding: 28px; text-decoration: none; color: inherit; transition: border-color 0.2s, transform 0.2s; display: block; }
+.proj-card:hover { border-color: var(--green); transform: translateY(-3px); }
+.proj-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.proj-card-name { font-family: var(--font-display); font-size: 17px; font-weight: 700; letter-spacing: -0.3px; line-height: 1.2; }
+.proj-card-arrow { font-size: 16px; color: var(--muted); transition: transform 0.2s, color 0.2s; }
+.proj-card:hover .proj-card-arrow { transform: translate(3px,-3px); color: var(--green); }
+.proj-card-desc { font-size: 13px; color: var(--muted); line-height: 1.7; font-weight: 300; margin-bottom: 16px; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.proj-tag { font-family: var(--font-mono); font-size: 10px; padding: 3px 8px; background: var(--surface); color: var(--muted); border: 1px solid var(--border); letter-spacing: 0.3px; }
+.badge { font-family: var(--font-mono); font-size: 10px; padding: 3px 10px; border: 1px solid; font-weight: 500; display: inline-block; margin-bottom: 10px; letter-spacing: 0.5px; }
+.badge-f { color: #f6c90e; background: rgba(246,201,14,0.08); border-color: rgba(246,201,14,0.3); }
+.badge-g { color: var(--green); background: var(--green-dim); border-color: rgba(0,230,118,0.3); }
+.badge-go { color: #c792ea; background: rgba(199,146,234,0.08); border-color: rgba(199,146,234,0.3); }
+
+/* ── SKILLS ── */
+.skill-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+.sf-btn { padding: 8px 20px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; background: var(--card); border: 1px solid var(--border); color: var(--muted); transition: all 0.2s; }
+.sf-btn.active { background: var(--green); color: #0d0f0e; border-color: var(--green); font-weight: 700; }
+.sf-btn:hover:not(.active) { border-color: var(--green); color: var(--green); }
+.skill-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+.skill-item { background: var(--card); border: 1px solid var(--border); padding: 20px; transition: border-color 0.2s, background 0.2s; }
+.skill-item:hover { border-color: var(--green); background: var(--green-dim); }
+.skill-item.hidden { display: none; }
+.skill-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+.skill-name { font-family: var(--font-display); font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+.skill-desc { font-size: 11px; color: var(--muted); font-weight: 300; line-height: 1.5; font-family: var(--font-mono); }
+
+/* ── VIBES ── */
+.vibes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.vibe { background: var(--card); border: 1px solid var(--border); padding: 28px; transition: border-color 0.2s, background 0.2s; position: relative; overflow: hidden; }
+.vibe::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--green); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+.vibe:hover { border-color: var(--green); background: var(--green-dim); }
+.vibe:hover::after { transform: scaleX(1); }
+.vibe-lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.vibe-lbl::before { content: '→'; color: var(--green); }
+.vibe-emoji { font-size: 28px; margin-bottom: 12px; display: block; line-height: 1; }
+.vibe-main { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.3px; line-height: 1.2; }
+.vibe-sub { font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.6; }
+.vibe-tag { display: inline-block; margin-top: 14px; font-family: var(--font-mono); font-size: 10px; padding: 3px 10px; border: 1px solid var(--border); color: var(--muted); letter-spacing: 0.5px; }
+.vibe-wide { grid-column: span 2; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 28px; }
+.book-cover { width: 64px; height: 90px; background: linear-gradient(135deg, #1a2e1e, #0d1f10); border: 1px solid rgba(0,230,118,0.2); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; box-shadow: 4px 4px 0 var(--border); }
+
+/* ── CONTACT ── */
+.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.contact-big { font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 20px; }
+.contact-big em { font-style: italic; color: var(--green); }
+.contact-sub { font-size: 15px; color: var(--muted); font-weight: 300; line-height: 1.7; margin-bottom: 36px; max-width: 360px; }
+.contact-links { display: flex; flex-direction: column; gap: 2px; }
+.contact-lnk { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; background: var(--card); border: 1px solid var(--border); text-decoration: none; color: var(--text); font-weight: 500; font-size: 14px; transition: border-color 0.2s, background 0.2s; }
+.contact-lnk:hover { border-color: var(--green); background: var(--green-dim); color: var(--green); }
+.contact-lnk span { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+
+/* ── FOOTER ── */
+footer { padding: 28px 0; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing: 0.5px; }
+
+/* ── REVEAL ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 1; transform: none; transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.hidden-start { opacity: 0; transform: translateY(20px); }
+.reveal.visible { opacity: 1 !important; transform: none !important; }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; padding: 100px 0 60px; }
+  .hero-right { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .skill-grid { grid-template-columns: repeat(2,1fr); }
+  .vibes-grid { grid-template-columns: 1fr 1fr; }
+  .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+  .tl-row { grid-template-columns: 100px 1fr; gap: 20px; }
+}
+@media (max-width: 600px) {
+  .wrap { padding: 0 20px; }
+  nav .inner { padding: 0 20px; }
+  .nav-links { gap: 20px; }
+  .skill-grid { grid-template-columns: 1fr 1fr; }
+  .vibes-grid { grid-template-columns: 1fr; }
+  .vibe-wide { grid-column: span 1; flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="inner">
+    <div class="nav-logo">ink@portfolio<span>:~$</span></div>
+    <div class="nav-links">
+      <a href="#about">hakkımda</a>
+      <a href="#experience">deneyim</a>
+      <a href="#projects">projeler</a>
+      <a href="#skills">yetkinlikler</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Product & Tech · New Grad</div>
+      <h1 class="hero-name">
+        İrem Nur
+        <span class="line2">Kaya</span>
+      </h1>
+      <p class="hero-desc">
+        Teknik kısıtları kullanıcı odaklı <em>stratejik çözümlere</em> dönüştürüyorum.
+        Veri bilimi ve altyapı deneyimini ürün vizyonuyla birleştiren, çözüm odaklı bir yaklaşım.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-primary">İletişime Geç</a>
+        <a href="https://github.com/irem-kaya" target="_blank" class="btn btn-ghost">GitHub →</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="terminal">
+        <div class="term-bar">
+          <div class="term-dot r"></div>
+          <div class="term-dot y"></div>
+          <div class="term-dot g"></div>
+          <div class="term-title">irem@devops ~ whoami</div>
+        </div>
+        <div class="term-body">
+          <div><span class="term-prompt">$</span> <span class="term-cmd">cat profile.json</span></div>
+          <div style="color:#5a6b5e;">{</div>
+          <div>&nbsp;&nbsp;<span class="term-key">"name"</span>: <span class="term-str">"İrem Nur Kaya"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="term-key">"role"</span>: <span class="term-str">"Product Management"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="term-key">"top_talent"</span>: <span class="term-str">"%0.1 Yapay Zeka Bursiyeri"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="term-key">"focus"</span>: <span class="term-str">["Product", "Data", "Infra"]</span>,</div>
+          <div>&nbsp;&nbsp;<span class="term-key">"status"</span>: <span class="term-str">"Ready to Build"</span></div>
+          <div style="color:#5a6b5e;">}</div>
+          <div style="margin-top:8px;"><span class="term-prompt">$</span> <span class="term-cmd">echo $READY</span><div class="term-cursor"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><strong>TEKNOFEST Finalist</strong><span class="marquee-sep">·</span>5.393 takım arasından</div>
+    <div class="marquee-item"><strong>%0.1 Veri Bilimi Bursiyeri</strong><span class="marquee-sep">·</span>25.000+ aday arasından</div>
+    <div class="marquee-item"><strong>Anadolu Ajansı Hackathon Finalist</strong><span class="marquee-sep">·</span>2023</div>
+    <div class="marquee-item"><strong>TÜBİTAK 2209-A</strong><span class="marquee-sep">·</span>Devam Eden Proje</div>
+    <div class="marquee-item"><strong>Docker · Linux · AWS · Python</strong><span class="marquee-sep">·</span>Hands-on Deneyim</div>
+    <div class="marquee-item"><strong>GPA 3.37/4.00</strong><span class="marquee-sep">·</span>Bursa Uludağ Üniversitesi</div>
+    <div class="marquee-item"><strong>TEKNOFEST Finalist</strong><span class="marquee-sep">·</span>5.393 takım arasından</div>
+    <div class="marquee-item"><strong>%0.1 Veri Bilimi Bursiyeri</strong><span class="marquee-sep">·</span>25.000+ aday arasından</div>
+    <div class="marquee-item"><strong>Anadolu Ajansı Hackathon Finalist</strong><span class="marquee-sep">·</span>2023</div>
+    <div class="marquee-item"><strong>TÜBİTAK 2209-A</strong><span class="marquee-sep">·</span>Devam Eden Proje</div>
+    <div class="marquee-item"><strong>Docker · Linux · AWS · Python</strong><span class="marquee-sep">·</span>Hands-on Deneyim</div>
+    <div class="marquee-item"><strong>GPA 3.37/4.00</strong><span class="marquee-sep">·</span>Bursa Uludağ Üniversitesi</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="wrap">
+  <section id="about">
+    <div class="sec-header reveal">
+      <div class="sec-label">01 · Hakkımda</div>
+      <h2 class="sec-title">Teknik zemin, <em>product bakışı.</em></h2>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p class="about-p">YBS mezunu olarak teknolojinin hem iş hem de mühendislik tarafında yer aldım. Stajlarımda <strong>50+ sensörden gelen veriyi anlamlandırarak operasyonel verimliliği artıran proaktif sistemler kurguladım.</strong></p>
+        <p class="about-p">İki ulusal yarışmadaki finalistlik sürecimi, <strong>belirsiz problemleri yapılandırılmış ürün yol haritalarına dönüştürme</strong> yeteneğime borçluyum. Teknik ekiplerle mühendislik dilinde konuşabiliyor, bu dili kullanıcı ihtiyaçlarına tercüme edebiliyorum.</p>
+        <div class="chips">
+          <span class="chip">Product Strategy</span>
+          <span class="chip">Data Analysis</span>
+          <span class="chip">User Research</span>
+          <span class="chip">SQL / Python</span>
+          <span class="chip">Docker & Linux</span>
+          <span class="chip">Agile Methodologies</span>
+        </div>
+      </div>
+      <div class="stats reveal reveal-d1">
+        <div class="stat-row">
+          <div class="stat-n">%0.1</div>
+          <div class="stat-l">Veri Bilimi Seçkin Bursiyer</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-n">2×</div>
+          <div class="stat-l">Ulusal Yarışma Finalistliği</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-n">3.37</div>
+          <div class="stat-l">YBS Lisans Başarı Puanı</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="wrap">
+  <section id="experience">
+    <div class="sec-header reveal">
+      <div class="sec-label">02 · Deneyim</div>
+      <h2 class="sec-title">Saha <em>deneyimi.</em></h2>
+    </div>
+    <div class="reveal">
+      <div class="tab-ctrl">
+        <button class="tab-btn active" onclick="switchTab('is',this)">İş Deneyimi</button>
+        <button class="tab-btn" onclick="switchTab('egitim',this)">Eğitim</button>
+      </div>
+    </div>
+    <div class="tab-panel active" id="tab-is">
+      <div class="tl">
+        <div class="tl-row reveal">
+          <div class="tl-when">MAR – HAZ 2025<br>Bursa</div>
+          <div>
+            <div class="tl-role">IT Stajyeri</div>
+            <div class="tl-org">Vibracoustic · Freudenberg Group</div>
+            <div class="tl-body">50+ IoT/PLC sensörü izledim, ağ gecikmelerini minimize ettim. PRTG ile proaktif arıza tespiti ve Logo Tiger ERP kullanıcı sorunlarını çözdüm.</div>
+          </div>
+        </div>
+        <div class="tl-row reveal">
+          <div class="tl-when">HAZ – EYL 2024<br>Tekirdağ</div>
+          <div>
+            <div class="tl-role">Full Stack Geliştirme Stajyeri</div>
+            <div class="tl-org">PinSoft</div>
+            <div class="tl-body">Docker ile containerization, Linux deployment, Liquibase ile PostgreSQL migration yönettim. CI/CD pipeline'ı canlı projede deneyimledim.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-panel" id="tab-egitim">
+      <div class="tl">
+        <div class="tl-row reveal">
+          <div class="tl-when">2021 – 2025</div>
+          <div>
+            <div class="tl-role">Yönetim Bilişim Sistemleri — Lisans</div>
+            <div class="tl-org">Bursa Uludağ Üniversitesi · GPA 3.37/4.00</div>
+            <div class="tl-body">Tez: Akıllı şehirler ve kullanıcı teknoloji algısı. Veri yapıları, veritabanı, büyük veri, OOP.</div>
+          </div>
+        </div>
+        <div class="tl-row reveal">
+          <div class="tl-when">2024 – 2025</div>
+          <div>
+            <div class="tl-role">Veri Bilimi Bursiyeri</div>
+            <div class="tl-org">Yapay Zeka ve Teknoloji Akademisi · %0.1</div>
+            <div class="tl-body">25.000+ aday arasından seçilen ilk %0.1. ML, büyük veri yönetimi ve modelleme üzerine yoğun teknik eğitim.</div>
+          </div>
+        </div>
+        <div class="tl-row reveal">
+          <div class="tl-when">EYL – ARA 2024</div>
+          <div>
+            <div class="tl-role">21. Yüzyıl Yetkinlikleri Programı</div>
+            <div class="tl-org">YetGen</div>
+            <div class="tl-body">Algoritmik düşünme, sunum teknikleri, liderlik ve kariyer planlama üzerine 12 haftalık program.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PROJECTS -->
+<div class="wrap">
+  <section id="projects">
+    <div class="sec-header reveal">
+      <div class="speed-row">
+        <div>
+          <div class="sec-label">03 · Projeler</div>
+          <h2 class="sec-title">Yaptıklarım.</h2>
+        </div>
+        <div class="speed-ctrl">
+          <button class="speed-btn slow" onclick="setSpeed('slow',this)">Slow</button>
+          <button class="speed-btn medium active" onclick="setSpeed('medium',this)">Medium</button>
+          <button class="speed-btn fast" onclick="setSpeed('fast',this)">Fast</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="proj-scroll-wrap reveal">
+  <div class="proj-scroll-track medium" id="projTrack">
+    <a class="proj-card" href="https://github.com/irem-kaya" target="_blank">
+      <span class="badge badge-f">🏆 TEKNOFEST Finalist · 5.393 takım</span>
+      <div class="proj-card-top"><div class="proj-card-name">Sağlıkta Yapay Zeka</div><div class="proj-card-arrow">↗</div></div>
+      <p class="proj-card-desc">Meme kanseri erken tanısı için hibrit AI sistemi. ResNet + BERT pipeline ile %82 doğruluk.</p>
+      <div class="proj-tags"><span class="proj-tag">PyTorch</span><span class="proj-tag">BERT</span><span class="proj-tag">CNN</span><span class="proj-tag">Python</span></div>
+    </a>
+    <a class="proj-card" href="https://github.com/irem-kaya" target="_blank">
+      <span class="badge badge-go">TÜBİTAK 2209-A · Devam Ediyor</span>
+      <div class="proj-card-top"><div class="proj-card-name">IoB Müşteri Analizi</div><div class="proj-card-arrow">↗</div></div>
+      <p class="proj-card-desc">Hava durumu verisi ile tüketici davranışı analizi. Gıda sektörü için talep tahmin ve envanter optimizasyonu.</p>
+      <div class="proj-tags"><span class="proj-tag">Pandas</span><span class="proj-tag">Scikit-learn</span><span class="proj-tag">ETL</span></div>
+    </a>
+    <a class="proj-card" href="https://github.com/irem-kaya" target="_blank">
+      <span class="badge badge-f">🏆 AA Hackathon Finalist</span>
+      <div class="proj-card-top"><div class="proj-card-name">Otonom Haber Yönetimi</div><div class="proj-card-arrow">↗</div></div>
+      <p class="proj-card-desc">48 saatte uçtan uca haber otomasyon sistemi. Web scraping + ChatGPT API + NLP editör arayüzü.</p>
+      <div class="proj-tags"><span class="proj-tag">BeautifulSoup</span><span class="proj-tag">ChatGPT API</span><span class="proj-tag">NLP</span></div>
+    </a>
+    <a class="proj-card" href="https://github.com/irem-kaya" target="_blank">
+      <span class="badge badge-g">Shipped · Ocak 2026</span>
+      <div class="proj-card-top"><div class="proj-card-name">AWS Serverless Blog API</div><div class="proj-card-arrow">↗</div></div>
+      <p class="proj-card-desc">Lambda + API Gateway + DynamoDB. LocalStack ile konteynerize yerel bulut ortamı. IaC ile tam otomatize.</p>
+      <div class="proj-tags"><span class="proj-tag">Lambda</span><span class="proj-tag">Docker</span><span class="proj-tag">IaC</span><span class="proj-tag">AWS</span></div>
+    </a>
+    <a class="proj-card" href="https://github.com/irem-kaya" target="_blank">
+      <span class="badge badge-g">Shipped</span>
+      <div class="proj-card-top"><div class="proj-card-name">Kütüphane Yönetim Sistemi</div><div class="proj-card-arrow">↗</div></div>
+      <p class="proj-card-desc">Code First + Entity Framework + Identity. CRUD, rol yönetimi ve tam işlevli yönetim paneli.</p>
+      <div class="proj-tags"><span class="proj-tag">C#</span><span class="proj-tag">ASP.NET MVC</span><span class="proj-tag">SQL Server</span></div>
+    </a>
+    <!-- duplicate -->
+    <a class="proj-card" href="https://github.com/irem-kaya" target="_blank">
+      <span class="badge badge-f">🏆 TEKNOFEST Finalist · 5.393 takım</span>
+      <div class="proj-card-top"><div class="proj-card-name">Sağlıkta Yapay Zeka</div><div class="proj-card-arrow">↗</div></div>
+      <p class="proj-card-desc">Meme kanseri erken tanısı için hibrit AI sistemi. ResNet + BERT pipeline ile %82 doğruluk.</p>
+      <div class="proj-tags"><span class="proj-tag">PyTorch</span><span class="proj-tag">BERT</span><span class="proj-tag">CNN</span><span class="proj-tag">Python</span></div>
+    </a>
+    <a class="proj-card" href="https://github.com/irem-kaya" target="_blank">
+      <span class="badge badge-go">TÜBİTAK 2209-A · Devam Ediyor</span>
+      <div class="proj-card-top"><div class="proj-card-name">IoB Müşteri Analizi</div><div class="proj-card-arrow">↗</div></div>
+      <p class="proj-card-desc">Hava durumu verisi ile tüketici davranışı analizi. Gıda sektörü için talep tahmin ve envanter optimizasyonu.</p>
+      <div class="proj-tags"><span class="proj-tag">Pandas</span><span class="proj-tag">Scikit-learn</span><span class="proj-tag">ETL</span></div>
+    </a>
+    <a class="proj-card" href="https://github.com/irem-kaya" target="_blank">
+      <span class="badge badge-f">🏆 AA Hackathon Finalist</span>
+      <div class="proj-card-top"><div class="proj-card-name">Otonom Haber Yönetimi</div><div class="proj-card-arrow">↗</div></div>
+      <p class="proj-card-desc">48 saatte uçtan uca haber otomasyon sistemi. Web scraping + ChatGPT API + NLP editör arayüzü.</p>
+      <div class="proj-tags"><span class="proj-tag">BeautifulSoup</span><span class="proj-tag">ChatGPT API</span><span class="proj-tag">NLP</span></div>
+    </a>
+    <a class="proj-card" href="https://github.com/irem-kaya" target="_blank">
+      <span class="badge badge-g">Shipped · Ocak 2026</span>
+      <div class="proj-card-top"><div class="proj-card-name">AWS Serverless Blog API</div><div class="proj-card-arrow">↗</div></div>
+      <p class="proj-card-desc">Lambda + API Gateway + DynamoDB. LocalStack ile konteynerize yerel bulut ortamı. IaC ile tam otomatize.</p>
+      <div class="proj-tags"><span class="proj-tag">Lambda</span><span class="proj-tag">Docker</span><span class="proj-tag">IaC</span><span class="proj-tag">AWS</span></div>
+    </a>
+    <a class="proj-card" href="https://github.com/irem-kaya" target="_blank">
+      <span class="badge badge-g">Shipped</span>
+      <div class="proj-card-top"><div class="proj-card-name">Kütüphane Yönetim Sistemi</div><div class="proj-card-arrow">↗</div></div>
+      <p class="proj-card-desc">Code First + Entity Framework + Identity. CRUD, rol yönetimi ve tam işlevli yönetim paneli.</p>
+      <div class="proj-tags"><span class="proj-tag">C#</span><span class="proj-tag">ASP.NET MVC</span><span class="proj-tag">SQL Server</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="wrap">
+  <section id="skills">
+    <div class="sec-header reveal">
+      <div class="sec-label">04 · Yetkinlikler</div>
+      <h2 class="sec-title">Çalıştığım <em>araçlar.</em></h2>
+    </div>
+    <div class="skill-filter reveal">
+      <button class="sf-btn active" onclick="filterSkill('all',this)">Tümü</button>
+      <button class="sf-btn" onclick="filterSkill('veri',this)">Veri & AI</button>
+      <button class="sf-btn" onclick="filterSkill('infra',this)">Altyapı</button>
+      <button class="sf-btn" onclick="filterSkill('dev',this)">Geliştirme</button>
+      <button class="sf-btn" onclick="filterSkill('dil',this)">Dil</button>
+    </div>
+    <div class="skill-grid reveal">
+      <div class="skill-item" data-cat="veri"><div class="skill-icon">🐍</div><div class="skill-name">Python</div><div class="skill-desc">Pandas · Scikit-learn · PyTorch</div></div>
+      <div class="skill-item" data-cat="veri"><div class="skill-icon">🗄️</div><div class="skill-name">SQL</div><div class="skill-desc">PostgreSQL · SQL Server · optimizasyon</div></div>
+      <div class="skill-item" data-cat="veri"><div class="skill-icon">🤖</div><div class="skill-name">Makine Öğrenimi</div><div class="skill-desc">CNN · BERT · ensemble learning</div></div>
+      <div class="skill-item" data-cat="veri"><div class="skill-icon">📊</div><div class="skill-name">Veri Analizi</div><div class="skill-desc">ETL pipeline · predictive analytics</div></div>
+      <div class="skill-item" data-cat="infra"><div class="skill-icon">🐳</div><div class="skill-name">Docker</div><div class="skill-desc">Containerization · Compose · LocalStack</div></div>
+      <div class="skill-item" data-cat="infra"><div class="skill-icon">🐧</div><div class="skill-name">Linux</div><div class="skill-desc">Sistem yönetimi · bash scripting</div></div>
+      <div class="skill-item" data-cat="infra"><div class="skill-icon">☁️</div><div class="skill-name">AWS</div><div class="skill-desc">EC2 · S3 · Lambda · API Gateway</div></div>
+      <div class="skill-item" data-cat="infra"><div class="skill-icon">📡</div><div class="skill-name">PRTG Monitor</div><div class="skill-desc">Ağ izleme · alert yönetimi</div></div>
+      <div class="skill-item" data-cat="dev"><div class="skill-icon">🔀</div><div class="skill-name">Git / GitHub</div><div class="skill-desc">Branching · pull request · CI/CD</div></div>
+      <div class="skill-item" data-cat="dev"><div class="skill-icon">⚙️</div><div class="skill-name">CI/CD</div><div class="skill-desc">Pipeline tasarımı · deployment otomasyon</div></div>
+      <div class="skill-item" data-cat="dev"><div class="skill-icon">☕</div><div class="skill-name">Java / C#</div><div class="skill-desc">Spring Boot · ASP.NET MVC · OOP</div></div>
+      <div class="skill-item" data-cat="dev"><div class="skill-icon">🗃️</div><div class="skill-name">Liquibase</div><div class="skill-desc">DB schema versioning · migration</div></div>
+      <div class="skill-item" data-cat="dil"><div class="skill-icon">🇹🇷</div><div class="skill-name">Türkçe</div><div class="skill-desc">Ana dil</div></div>
+      <div class="skill-item" data-cat="dil"><div class="skill-icon" style="font-family:var(--font-mono);font-size:16px;font-weight:700;color:var(--green);">EN</div><div class="skill-name">İngilizce</div><div class="skill-desc">Upper intermediate · teknik iletişim</div></div>
+    </div>
+  </section>
+</div>
+
+<!-- VIBES -->
+<div class="wrap">
+  <section id="vibes">
+    <div class="sec-header reveal">
+      <div class="sec-label">05 · Current Vibes</div>
+      <h2 class="sec-title">Şu an <em>ne yapıyorum.</em></h2>
+    </div>
+    <div class="vibes-grid">
+      <div class="vibe reveal">
+        <span class="vibe-emoji">🎵</span>
+        <div class="vibe-lbl">Dinliyorum</div>
+        <div class="vibe-main">Manifest</div>
+        <div class="vibe-sub">Çalışırken, yürürken, her an — kapalı kulaklık, açık zihin.</div>
+        <span class="vibe-tag">Türkçe Pop</span>
+      </div>
+      <div class="vibe reveal">
+        <span class="vibe-emoji">🎧</span>
+        <div class="vibe-lbl">Podcast</div>
+        <div class="vibe-main">Lenny's Podcast</div>
+        <div class="vibe-sub">Product · Growth · Career. Her bölümden bir şey öğrenmeden kapanmıyor.</div>
+        <span class="vibe-tag">Product</span>
+      </div>
+      <div class="vibe reveal">
+        <span class="vibe-emoji">🧘</span>
+        <div class="vibe-lbl">Hareket</div>
+        <div class="vibe-main">Pilates</div>
+        <div class="vibe-sub">Zihin temizliğinin en kısa yolu. Ekran başından kalkmanın en iyi bahanesi.</div>
+        <span class="vibe-tag">Haftalık Rutin</span>
+      </div>
+      <div class="vibe reveal">
+        <span class="vibe-emoji">✈️</span>
+        <div class="vibe-lbl">Seyahat Tarzım</div>
+        <div class="vibe-main">Şehir gezisi</div>
+        <div class="vibe-sub">Sokaklar, kafeler, insanlar. Rehbersiz, plansız, meraklı.</div>
+        <span class="vibe-tag">Spontaneous</span>
+      </div>
+      <div class="vibe vibe-wide reveal">
+        <div class="book-cover">📖</div>
+        <div>
+          <div class="vibe-lbl">Şu an okuyorum</div>
+          <div class="vibe-main">Jane Eyre</div>
+          <div class="vibe-sub" style="margin-bottom:6px;">Charlotte Brontë · Klasik Roman</div>
+          <div class="vibe-sub">Bağımsız, kararlı, kendi sesini bulan bir kadın hikâyesi. Asıl motivasyon kaynağım.</div>
+          <span class="vibe-tag">Klasik Edebiyat</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CONTACT -->
+<div class="wrap">
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="reveal">
+        <div class="sec-label">06 · İletişim</div>
+        <div class="contact-big">Birlikte<br>bir şeyler<br><em>inşa edelim.</em></div>
+        <p class="contact-sub">Product odaklı, geniş kullanıcı kitlesine sahip şirketlerde öğrenmek ve katkı sağlamak istiyorum.</p>
+      </div>
+      <div class="contact-links reveal reveal-d1">
+        <a class="contact-lnk" href="mailto:iremnurkaya61@gmail.com">
+          iremnurkaya61@gmail.com
+          <span>E-posta →</span>
+        </a>
+        <a class="contact-lnk" href="https://linkedin.com/in/kayyirrem" target="_blank">
+          linkedin.com/in/kayyirrem
+          <span>LinkedIn →</span>
+        </a>
+        <a class="contact-lnk" href="https://github.com/irem-kaya" target="_blank">
+          github.com/irem-kaya
+          <span>GitHub →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <footer>
+    <span>© 2026 İrem Nur Kaya</span>
+  </footer>
+</div>
+
+<script>
+  function setSpeed(speed, btn) {
+    const track = document.getElementById('projTrack');
+    track.classList.remove('slow','medium','fast');
+    track.classList.add(speed);
+    document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    btn.classList.add('active');
+  }
+  function filterSkill(cat, btn) {
+    document.querySelectorAll('.sf-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.skill-item[data-cat]').forEach(el => {
+      el.classList.toggle('hidden', cat !== 'all' && el.dataset.cat !== cat);
+    });
+  }
+  document.querySelectorAll('.reveal').forEach(el => {
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  });
+</script>
