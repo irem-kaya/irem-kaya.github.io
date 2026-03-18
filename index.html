@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İrem Nur Kaya — Data Engineering & AI</title>
+<meta name="description" content="İrem Nur Kaya — MIS graduate specializing in Data Engineering, AI/ML, and Cloud. Teknofest finalist, Top 0.1% AI Scholar, open-source contributor to Trendyol Baklava Design System.">
+<meta name="keywords" content="İrem Nur Kaya, Data Engineer, AI, Machine Learning, Python, SQL, AWS, Trendyol, Baklava, portfolio">
+<meta name="author" content="İrem Nur Kaya">
+<meta property="og:title" content="İrem Nur Kaya — Data Engineering & AI">
+<meta property="og:description" content="Teknofest finalist, Top 0.1% AI Scholar. Building data systems and AI/ML pipelines.">
+<meta property="og:url" content="https://irem-kaya.github.io">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="İrem Nur Kaya — Data Engineering & AI">
+<meta name="twitter:description" content="Teknofest finalist, Top 0.1% AI Scholar. Building data systems and AI/ML pipelines.">
+<link rel="canonical" href="https://irem-kaya.github.io">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a09;
+  --bg2:#111110;
+  --card:#161615;
+  --border:#252522;
+  --text:#eeeae3;
+  --muted:#767670;
+  --muted2:#333330;
+  --accent:#00e676;
+  --ad:#0a0a09;
+  --adim:rgba(0,230,118,.07);
+  --aborder:rgba(0,230,118,.25);
+  --fd:'Fraunces',serif;
+  --fs:'DM Sans',sans-serif;
+  --fm:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fs);overflow-x:hidden;line-height:1.65}
+::selection{background:var(--accent);color:var(--ad)}
+::-webkit-scrollbar{width:2px}
+::-webkit-scrollbar-thumb{background:var(--border)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+nav.scrolled{background:rgba(10,10,9,.95);backdrop-filter:blur(20px);border-color:var(--border)}
+nav .inner{max-width:1080px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center;height:64px}
+.nav-logo{font-family:var(--fd);font-size:17px;font-weight:700;color:var(--text);text-decoration:none;opacity:0;transition:opacity .3s}
+.nav-logo.show{opacity:1}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:.5px;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.role-badge{font-family:var(--fm);font-size:10px;padding:4px 10px;background:var(--accent);color:var(--ad);font-weight:600;letter-spacing:.5px;display:none}
+.role-badge.show{display:inline-block}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 40px}
+
+/* ══ HERO ══ */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:center;padding-top:64px;position:relative;overflow:hidden}
+
+/* subtle grid */
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:72px 72px;opacity:.2;pointer-events:none}
+
+/* glow */
+.hero-glow{position:absolute;top:50%;left:25%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,230,118,.12) 0%,transparent 65%);pointer-events:none;z-index:0}
+
+.hero-left{padding:40px 48px 40px 0;position:relative;z-index:1}
+.hero-right{position:relative;z-index:1;padding:40px 0 40px 48px;border-left:1px solid var(--border)}
+
+.hero-eyebrow{font-family:var(--fm);font-size:11px;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;opacity:0;animation:fadeUp .6s .1s forwards}
+.hero-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--accent);flex-shrink:0}
+
+.hero-name{font-family:var(--fd);font-weight:900;font-size:clamp(56px,6.5vw,108px);line-height:.88;letter-spacing:-4px;margin-bottom:16px;opacity:0;animation:fadeUp .7s .2s forwards;color:var(--text)}
+.hero-name .italic{font-style:italic;font-weight:300;color:var(--muted);display:block}
+
+.hero-sub{font-size:15px;color:var(--muted);max-width:420px;line-height:1.7;font-weight:300;margin-bottom:24px;opacity:0;animation:fadeUp .7s .35s forwards}
+.hero-sub strong{color:var(--text);font-weight:500}
+.role-extra{display:none}
+.role-extra.show{display:block;margin-top:10px;color:var(--accent);font-size:14px}
+
+.hero-ctas{display:flex;gap:10px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .5s forwards}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;font-family:var(--fs);font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .25s;letter-spacing:.2px}
+.btn-green{background:var(--accent);color:var(--ad)}
+.btn-green:hover{background:#1af077;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,230,118,.25)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+/* TERMINAL */
+.hero-term{opacity:0;animation:fadeUp .8s .6s forwards}
+.terminal{background:#0f1a11;border:1px solid #1e3020;border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,230,118,.05),0 32px 80px rgba(0,0,0,.7),0 0 80px rgba(0,230,118,.06)}
+.term-bar{background:#162018;padding:13px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #1e3020}
+.dot{width:11px;height:11px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.term-title{font-family:var(--fm);font-size:11px;color:#3a5a3e;margin-left:6px}
+.term-body{padding:20px 22px;font-family:var(--fm);font-size:12.5px;line-height:2;min-height:260px}
+.tp{color:var(--accent)}.tc{color:var(--text)}.tk{color:#79b8ff}.ts{color:#9dec9d}.tb{color:#2a4a2e}
+.tcursor{display:inline-block;width:7px;height:13px;background:var(--accent);animation:blink 1.1s infinite;vertical-align:middle;margin-left:2px}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+/* MARQUEE */
+.mq{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:13px 0;background:var(--bg2);position:relative}
+.mq::before,.mq::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+.mq::before{left:0;background:linear-gradient(to right,var(--bg2),transparent)}
+.mq::after{right:0;background:linear-gradient(to left,var(--bg2),transparent)}
+.mq-track{display:flex;width:max-content;animation:mqs 38s linear infinite}
+.mq-track:hover{animation-play-state:paused}
+.mq-item{display:flex;align-items:center;gap:18px;padding:0 28px;font-family:var(--fm);font-size:11px;color:var(--muted);white-space:nowrap}
+.mq-item strong{color:var(--text);font-weight:500}
+.mq-dot{color:var(--muted2)}
+@keyframes mqs{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{padding:72px 0}
+.slabel{font-family:var(--fm);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.stitle{font-family:var(--fd);font-size:clamp(36px,4.5vw,62px);font-weight:900;letter-spacing:-2px;line-height:.96;margin-bottom:36px;color:var(--text)}
+.stitle em{font-style:italic;font-weight:300;color:var(--muted)}
+
+/* TABS */
+.tabs{display:flex;gap:2px;margin-bottom:32px}
+.tab{padding:10px 22px;font-family:var(--fm);font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;background:var(--card);border:1px solid var(--border);color:var(--muted);transition:all .2s}
+.tab.on{background:var(--accent);color:var(--ad);border-color:var(--accent);font-weight:700}
+.tab:not(.on):hover{border-color:var(--muted);color:var(--text)}
+.panel{display:none}.panel.on{display:block}
+
+/* TIMELINE */
+.tl-row{display:grid;grid-template-columns:150px 1fr;gap:40px;padding:24px 0;border-bottom:1px solid var(--border)}
+.tl-row:first-child{padding-top:0}
+.tl-row:last-child{border-bottom:none;padding-bottom:0}
+.tl-date{font-family:var(--fm);font-size:11px;color:var(--muted);padding-top:4px;line-height:1.6}
+.tl-role{font-family:var(--fd);font-size:22px;font-weight:700;letter-spacing:-.4px;color:var(--text);margin-bottom:4px}
+.tl-org{font-family:var(--fm);font-size:11px;color:var(--accent);margin-bottom:14px;letter-spacing:.3px}
+.tl-body{font-size:14px;color:var(--muted);line-height:1.85;font-weight:300}
+.tl-lnk{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-family:var(--fm);font-size:11px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--aborder);padding-bottom:1px;transition:border-color .2s}
+.tl-lnk:hover{border-color:var(--accent)}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.pc{background:var(--card);border:1px solid var(--border);padding:28px;text-decoration:none;color:inherit;display:block;position:relative;transition:border-color .25s,transform .25s,background .25s;cursor:pointer}
+.pc:hover{border-color:var(--accent);transform:translateY(-4px);background:#131a14}
+.pc.hide{display:none}
+.pbadge{font-family:var(--fm);font-size:10px;padding:3px 9px;border:1px solid;display:inline-block;margin-bottom:14px;letter-spacing:.4px}
+.bg{color:var(--accent);background:var(--adim);border-color:var(--aborder)}
+.bo{color:#fbbf24;background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.25)}
+.bp{color:#a78bfa;background:rgba(167,139,250,.07);border-color:rgba(167,139,250,.25)}
+.bt{color:#34d399;background:rgba(52,211,153,.07);border-color:rgba(52,211,153,.25)}
+.pname{font-family:var(--fd);font-size:19px;font-weight:700;letter-spacing:-.3px;color:var(--text);margin-bottom:8px;line-height:1.2}
+.parrow{position:absolute;top:28px;right:28px;color:var(--muted);font-size:17px;transition:transform .2s,color .2s}
+.pc:hover .parrow{transform:translate(3px,-3px);color:var(--accent)}
+.pdesc{font-size:13px;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:16px}
+.ptags{display:flex;flex-wrap:wrap;gap:5px}
+.ptag{font-family:var(--fm);font-size:10px;padding:3px 8px;background:var(--bg2);color:var(--muted);border:1px solid var(--border)}
+
+/* SKILLS */
+.sk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+.sk-group{background:var(--card);border:1px solid var(--border);padding:26px}
+.sk-title{font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.sk-pills{display:flex;flex-wrap:wrap;gap:7px}
+.pill{font-size:13px;padding:6px 13px;background:var(--bg2);border:1px solid var(--border);color:var(--muted);transition:all .2s}
+.pill:hover{border-color:var(--text);color:var(--text)}
+.pill.hi{border-color:var(--aborder);color:var(--accent);background:var(--adim)}
+
+/* CONTACT */
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.ct-big{font-family:var(--fd);font-size:clamp(40px,5.5vw,76px);font-weight:900;letter-spacing:-3px;line-height:.93;margin-bottom:20px;color:var(--text)}
+.ct-big em{font-style:italic;font-weight:300;color:var(--muted)}
+.ct-sub{font-size:15px;color:var(--muted);font-weight:300;line-height:1.8}
+.ct-links{display:flex;flex-direction:column;gap:2px}
+.ct-lnk{display:flex;align-items:center;justify-content:space-between;padding:19px 22px;background:var(--card);border:1px solid var(--border);text-decoration:none;color:var(--text);font-size:14px;font-weight:500;transition:all .2s}
+.ct-lnk:hover{background:var(--accent);color:var(--ad);border-color:var(--accent)}
+.ct-lnk span{font-family:var(--fm);font-size:11px;color:var(--muted);transition:color .2s}
+.ct-lnk:hover span{color:rgba(10,10,9,.5)}
+
+footer{padding:30px 0;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:var(--fm);font-size:11px;color:var(--muted)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}.rv.d4{transition-delay:.4s}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:80px}
+  .hero-left{padding:60px 0 40px}
+  .hero-right{padding:0 0 60px;border-left:none;border-top:1px solid var(--border)}
+  .proj-grid{grid-template-columns:1fr 1fr}
+  .sk-grid{grid-template-columns:1fr}
+  .ct-grid{grid-template-columns:1fr;gap:48px}
+  .tl-row{grid-template-columns:1fr;gap:8px}
+}
+@media(max-width:600px){
+  .wrap{padding:0 20px}
+  nav .inner{padding:0 20px}
+  .proj-grid{grid-template-columns:1fr}
+  .nav-links{gap:16px}
+  .hero-name{font-size:clamp(52px,14vw,80px)}
+}
+
+/* ══ MODAL ══ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--bg2);border:1px solid var(--border);max-width:680px;width:100%;max-height:90vh;overflow-y:auto;position:relative;transform:translateY(20px);transition:transform .3s}
+.modal-overlay.open .modal{transform:none}
+.modal-close{position:absolute;top:16px;right:20px;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1;transition:color .2s;z-index:2}
+.modal-close:hover{color:var(--text)}
+.modal-header{padding:32px 32px 0}
+.modal-badge{font-family:var(--fm);font-size:10px;padding:3px 9px;border:1px solid;display:inline-block;margin-bottom:14px;letter-spacing:.4px}
+.modal-title{font-family:var(--fd);font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--text);margin-bottom:8px}
+.modal-sub{font-family:var(--fm);font-size:11px;color:var(--accent);margin-bottom:20px;letter-spacing:.3px}
+.modal-body{padding:0 32px 32px}
+.modal-desc{font-size:14px;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:24px}
+.modal-section-title{font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.modal-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.modal-tag{font-family:var(--fm);font-size:11px;padding:4px 10px;background:var(--card);color:var(--muted);border:1px solid var(--border)}
+.modal-divider{border:none;border-top:1px solid var(--border);margin:20px 0}
+.modal-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--fm);font-size:12px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--aborder);padding-bottom:2px;transition:border-color .2s}
+.modal-link:hover{border-color:var(--accent)}
+.modal-highlights{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.modal-highlights li{font-size:13px;color:var(--muted);padding-left:16px;position:relative;font-weight:300}
+.modal-highlights li::before{content:'▪';position:absolute;left:0;color:var(--accent);font-size:10px;top:3px}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="inner">
+    <a href="/" class="nav-logo" id="navLogo">İrem Nur Kaya</a>
+    <div class="nav-links">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <span class="role-badge" id="roleBadge"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="wrap" style="display:contents">
+
+  <!-- LEFT -->
+  <div class="hero-left">
+    <div class="hero-eyebrow" id="heroTag">Data Engineering &amp; AI · New Grad</div>
+    <h1 class="hero-name">İrem<br>Nur<br><span class="italic">Kaya.</span></h1>
+    <p class="hero-sub">
+      <strong>Data engineering &amp; AI/ML</strong> — Teknofest finalist, Top 0.1% AI Scholar.
+      <span class="role-extra" id="roleDesc"></span>
+    </p>
+    <div class="hero-ctas">
+      <a href="irem_nur_kaya_cv.pdf" download="Irem_Nur_Kaya_CV.pdf" class="btn btn-green">↓ Download CV</a>
+      <a href="https://github.com/irem-kaya" target="_blank" class="btn btn-outline">GitHub →</a>
+    </div>
+  </div>
+
+  <!-- RIGHT — TERMINAL -->
+  <div class="hero-right">
+    <div class="hero-term">
+      <div class="terminal">
+        <div class="term-bar">
+          <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+          <div class="term-title">irem@data ~ whoami</div>
+        </div>
+        <div class="term-body" id="termBody"></div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mq-track">
+    <div class="mq-item"><strong>TEKNOFEST Finalist</strong><span class="mq-dot">·</span>Among 5,393 teams</div>
+    <div class="mq-item"><strong>Top 0.1% AI Scholar</strong><span class="mq-dot">·</span>25,000+ candidates</div>
+    <div class="mq-item"><strong>AA Hackathon Finalist</strong><span class="mq-dot">·</span>2024</div>
+    <div class="mq-item"><strong>TÜBİTAK 2209-A</strong><span class="mq-dot">·</span>Funded Research</div>
+    <div class="mq-item"><strong>Python · SQL · PyTorch · AWS · Docker</strong><span class="mq-dot">·</span>Hands-on</div>
+    <div class="mq-item"><strong>GPA 3.37</strong><span class="mq-dot">·</span>Bursa Uludağ University</div>
+    <div class="mq-item"><strong>TEKNOFEST Finalist</strong><span class="mq-dot">·</span>Among 5,393 teams</div>
+    <div class="mq-item"><strong>Top 0.1% AI Scholar</strong><span class="mq-dot">·</span>25,000+ candidates</div>
+    <div class="mq-item"><strong>AA Hackathon Finalist</strong><span class="mq-dot">·</span>2024</div>
+    <div class="mq-item"><strong>TÜBİTAK 2209-A</strong><span class="mq-dot">·</span>Funded Research</div>
+    <div class="mq-item"><strong>Python · SQL · PyTorch · AWS · Docker</strong><span class="mq-dot">·</span>Hands-on</div>
+    <div class="mq-item"><strong>GPA 3.37</strong><span class="mq-dot">·</span>Bursa Uludağ University</div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="wrap">
+  <section id="experience">
+    <div class="slabel rv">Experience</div>
+    <h2 class="stitle rv d1">Real-world <em>work.</em></h2>
+    <div class="tabs rv d2">
+      <button class="tab on" data-tab="work">Work</button>
+      <button class="tab" data-tab="oss">Open Source</button>
+      <button class="tab" data-tab="edu">Education</button>
+    </div>
+    <div class="panel on" id="tab-work">
+      <div class="tl-row rv">
+        <div class="tl-date">Mar – Jun 2025<br>Bursa</div>
+        <div>
+          <div class="tl-role">IT Operations &amp; Data Support Intern</div>
+          <div class="tl-org">Vibracoustic · Freudenberg Group</div>
+          <div class="tl-body">IoT/PLC monitoring with PRTG, hybrid Linux/Windows infra management, ERP (Logo Tiger) error resolution.</div>
+        </div>
+      </div>
+      <div class="tl-row rv d1">
+        <div class="tl-date">Jun – Sep 2024<br>Tekirdağ</div>
+        <div>
+          <div class="tl-role">Full Stack Developer Intern</div>
+          <div class="tl-org">PinSoft</div>
+          <div class="tl-body">Next.js web apps, RESTful APIs, PostgreSQL with Liquibase migrations, CI/CD on Linux.</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="tab-oss">
+      <div class="tl-row rv">
+        <div class="tl-date">Feb 2025</div>
+        <div>
+          <div class="tl-role">Open Source Contributor</div>
+          <div class="tl-org">Trendyol · Baklava Design System</div>
+          <div class="tl-body">WCAG 2.1 focus state story for bl-button. Storybook play function — 0 violations, 8 passes.</div>
+          <a class="tl-lnk" href="https://github.com/Trendyol/baklava/pull/1153" target="_blank">View PR #1153 on GitHub →</a>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="tab-edu">
+      <div class="tl-row rv">
+        <div class="tl-date">2021 – 2025</div>
+        <div>
+          <div class="tl-role">B.Sc. Management Information Systems</div>
+          <div class="tl-org">Bursa Uludağ University · GPA 3.37/4.00</div>
+          <div class="tl-body">Data Structures, Database Systems, Big Data, ML, OOP.</div>
+        </div>
+      </div>
+      <div class="tl-row rv d1">
+        <div class="tl-date">2024 – 2025</div>
+        <div>
+          <div class="tl-role">Data Science Scholar · Top 0.1%</div>
+          <div class="tl-org">AI &amp; Technology Academy</div>
+          <div class="tl-body">Top 0.1% among 25,000+ — ML, big data, applied modeling.</div>
+        </div>
+      </div>
+      <div class="tl-row rv d2">
+        <div class="tl-date">Sep – Dec 2024</div>
+        <div>
+          <div class="tl-role">21st Century Skills Program</div>
+          <div class="tl-org">YetGen</div>
+          <div class="tl-body">Algorithmic thinking, leadership, career planning.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PROJECTS -->
+<div class="wrap">
+  <section id="projects">
+    <div class="slabel rv">Projects</div>
+    <h2 class="stitle rv d1">Things I've <em>built.</em></h2>
+    <div class="proj-grid rv d2" id="projGrid">
+      <div class="pc" data-modal="baklava" data-roles="all software">
+        <span class="pbadge bg">🧩 Open Source · Trendyol</span>
+        <div class="parrow">↗</div>
+        <div class="pname">Baklava Design System</div>
+        <p class="pdesc">WCAG 2.1 focus state for bl-button. 0 accessibility violations.</p>
+        <div class="ptags"><span class="ptag">Lit</span><span class="ptag">Storybook</span><span class="ptag">WCAG 2.1</span><span class="ptag">Web Components</span></div>
+      </div>
+      <div class="pc" data-modal="healthcare" data-roles="all data ai">
+        <span class="pbadge bo">🏆 TEKNOFEST Finalist · 5,393 teams</span>
+        <div class="parrow">↗</div>
+        <div class="pname">AI in Healthcare</div>
+        <p class="pdesc">CNN + BERT pipeline for breast cancer detection. 82% BI-RADS accuracy.</p>
+        <div class="ptags"><span class="ptag">PyTorch</span><span class="ptag">BERT</span><span class="ptag">CNN</span><span class="ptag">Python</span></div>
+      </div>
+      <div class="pc" data-modal="iob" data-roles="all data">
+        <span class="pbadge bp">TÜBİTAK 2209-A · Funded</span>
+        <div class="parrow">↗</div>
+        <div class="pname">IoB Customer Analysis</div>
+        <p class="pdesc">Weather &amp; consumer behavior correlation. ETL pipelines for demand forecasting.</p>
+        <div class="ptags"><span class="ptag">Pandas</span><span class="ptag">Scikit-learn</span><span class="ptag">ETL</span><span class="ptag">Python</span></div>
+      </div>
+      <div class="pc" data-modal="news" data-roles="all ai product">
+        <span class="pbadge bo">🏆 AA Hackathon Finalist</span>
+        <div class="parrow">↗</div>
+        <div class="pname">Autonomous News Agent</div>
+        <p class="pdesc">48h hackathon. ChatGPT API + NLP for automated news pipeline.</p>
+        <div class="ptags"><span class="ptag">BeautifulSoup</span><span class="ptag">ChatGPT API</span><span class="ptag">NLP</span></div>
+      </div>
+      <div class="pc" data-modal="aws" data-roles="all software data">
+        <span class="pbadge bt">Shipped · 2025</span>
+        <div class="parrow">↗</div>
+        <div class="pname">AWS Serverless Blog API</div>
+        <p class="pdesc">Lambda + API Gateway + DynamoDB. LocalStack + IaC.</p>
+        <div class="ptags"><span class="ptag">Lambda</span><span class="ptag">Docker</span><span class="ptag">AWS</span><span class="ptag">IaC</span></div>
+      </div>
+      <div class="pc" data-modal="library" data-roles="all software">
+        <span class="pbadge bt">Shipped</span>
+        <div class="parrow">↗</div>
+        <div class="pname">Library Management System</div>
+        <p class="pdesc">ASP.NET MVC, Entity Framework, Identity. CRUD + role management.</p>
+        <div class="ptags"><span class="ptag">C#</span><span class="ptag">ASP.NET MVC</span><span class="ptag">SQL Server</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SKILLS -->
+<div class="wrap">
+  <section id="skills">
+    <div class="slabel rv">Skills</div>
+    <h2 class="stitle rv d1">Tools I <em>use.</em></h2>
+    <div class="sk-grid rv d2">
+      <div class="sk-group">
+        <div class="sk-title">Data &amp; AI</div>
+        <div class="sk-pills">
+          <span class="pill hi">Python</span><span class="pill hi">SQL</span><span class="pill hi">Pandas</span>
+          <span class="pill">PyTorch</span><span class="pill">Scikit-Learn</span><span class="pill">BERT / NLP</span>
+          <span class="pill">CNN · Deep Learning</span><span class="pill">ETL Pipelines</span><span class="pill">Power BI</span>
+        </div>
+      </div>
+      <div class="sk-group">
+        <div class="sk-title">Cloud &amp; Infrastructure</div>
+        <div class="sk-pills">
+          <span class="pill hi">AWS</span><span class="pill hi">Docker</span><span class="pill hi">Linux</span>
+          <span class="pill">Lambda · S3 · DynamoDB</span><span class="pill">Kubernetes</span>
+          <span class="pill">CI/CD</span><span class="pill">PRTG Monitor</span><span class="pill">IaC</span>
+        </div>
+      </div>
+      <div class="sk-group">
+        <div class="sk-title">Development</div>
+        <div class="sk-pills">
+          <span class="pill hi">Git / GitHub</span><span class="pill">Next.js</span>
+          <span class="pill">C# / ASP.NET MVC</span><span class="pill">PostgreSQL</span>
+          <span class="pill">RESTful API</span><span class="pill">Liquibase</span><span class="pill">Storybook</span>
+        </div>
+      </div>
+      <div class="sk-group">
+        <div class="sk-title">Methods &amp; Languages</div>
+        <div class="sk-pills">
+          <span class="pill">Agile / Scrum</span><span class="pill">ERP (Logo Tiger)</span>
+          <span class="pill">Postman</span><span class="pill">Excel</span>
+          <span class="pill">Turkish (Native)</span><span class="pill hi">English (Upper-Intermediate)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CONTACT -->
+<div class="wrap">
+  <section id="contact">
+    <div class="ct-grid">
+      <div>
+        <div class="slabel rv">Contact</div>
+        <div class="ct-big rv d1">Let's build<br><em>together.</em></div>
+        <p class="ct-sub rv d2">Open to data-driven, large-scale product teams.</p>
+      </div>
+      <div class="ct-links rv d1">
+        <a class="ct-lnk" href="/cdn-cgi/l/email-protection#e68f94838b8893948d879f87d0d7a6818b878f8ac885898b"><span class="__cf_email__" data-cfemail="e08992858d8e95928b819981d6d1a0878d81898cce838f8d">[email&#160;protected]</span><span>Email →</span></a>
+        <a class="ct-lnk" href="https://linkedin.com/in/kayyirrem" target="_blank">linkedin.com/in/kayyirrem<span>LinkedIn →</span></a>
+        <a class="ct-lnk" href="https://github.com/irem-kaya" target="_blank">github.com/irem-kaya<span>GitHub →</span></a>
+        <a class="ct-lnk" href="irem_nur_kaya_cv.pdf" download="Irem_Nur_Kaya_CV.pdf">Download CV<span>↓ PDF</span></a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <footer>
+    <span>© 2026 İrem Nur Kaya</span>
+    <span>Data Engineering &amp; AI · Open Source Contributor</span>
+  </footer>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ── NAV scroll effect
+  const nav = document.getElementById('nav');
+  const logo = document.getElementById('navLogo');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) { nav.classList.add('scrolled'); logo.classList.add('show'); }
+    else { nav.classList.remove('scrolled'); logo.classList.remove('show'); }
+  });
+
+  // ── Typewriter terminal
+  const termLines = [
+    {t:'p',v:'$ '},{t:'c',v:'cat profile.json'},
+    {t:'br'},{t:'b',v:'{'},
+    {t:'br'},{t:'sp',v:'  '},{t:'k',v:'"name"'},{t:'m',v:': '},{t:'s',v:'"İrem Nur Kaya"'},{t:'m',v:','},
+    {t:'br'},{t:'sp',v:'  '},{t:'k',v:'"role"'},{t:'m',v:': '},{t:'s',v:'__ROLE__'},{t:'m',v:','},
+    {t:'br'},{t:'sp',v:'  '},{t:'k',v:'"top_talent"'},{t:'m',v:': '},{t:'s',v:'"Top 0.1% AI Scholar"'},{t:'m',v:','},
+    {t:'br'},{t:'sp',v:'  '},{t:'k',v:'"focus"'},{t:'m',v:': '},{t:'s',v:'["Data","AI/ML","Cloud"]'},{t:'m',v:','},
+    {t:'br'},{t:'sp',v:'  '},{t:'k',v:'"open_source"'},{t:'m',v:': '},{t:'s',v:'"Trendyol/baklava"'},{t:'m',v:','},
+    {t:'br'},{t:'sp',v:'  '},{t:'k',v:'"status"'},{t:'m',v:': '},{t:'s',v:'"Ready to Build"'},
+    {t:'br'},{t:'b',v:'}'},
+    {t:'br'},{t:'p',v:'$ '},{t:'c',v:'echo $READY'},{t:'cur'},
+  ];
+
+  function typeTerminal(roleStr) {
+    const body = document.getElementById('termBody');
+    body.innerHTML = '';
+    const lines = termLines.map(l => ({...l, v: l.v ? l.v.replace('__ROLE__', roleStr) : ''}));
+    let lineEl = document.createElement('div');
+    body.appendChild(lineEl);
+    let i = 0;
+    const colorOf = {p:'tp',c:'tc',k:'tk',s:'ts',b:'tb',m:'',sp:''};
+
+    function next() {
+      if (i >= lines.length) return;
+      const tok = lines[i++];
+      if (tok.t === 'br') {
+        lineEl = document.createElement('div');
+        body.appendChild(lineEl);
+        setTimeout(next, 30);
+      } else if (tok.t === 'cur') {
+        const span = document.createElement('span');
+        span.className = 'tcursor';
+        lineEl.appendChild(span);
+      } else {
+        const cls = colorOf[tok.t];
+        typeToken(tok.v, cls, lineEl, next);
+      }
+    }
+
+    function typeToken(text, cls, parent, done) {
+      let j = 0;
+      const span = cls ? document.createElement('span') : null;
+      if (span) { span.className = cls; parent.appendChild(span); }
+      const target = span || parent;
+      function ch() {
+        if (j >= text.length) { done(); return; }
+        target.textContent += text[j++];
+        setTimeout(ch, 18 + Math.random() * 12);
+      }
+      ch();
+    }
+
+    setTimeout(next, 400);
+  }
+
+  // ── Tabs
+  document.querySelectorAll('.tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.tab;
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+      document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
+      document.getElementById('tab-' + t).classList.add('on');
+      btn.classList.add('on');
+    });
+  });
+
+  // ── Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+  // ── Project modals
+  const projects = {
+    baklava: {
+      badge: '🧩 Open Source · Trendyol', badgeClass: 'bg',
+      title: 'Baklava Design System',
+      sub: 'Trendyol · Feb 2025',
+      desc: 'Contributed to Trendyol\'s open-source UI component library used across millions of users. Implemented a WCAG 2.1 compliant focus state story for the bl-button component.',
+      highlights: [
+        'WCAG 2.1 focus state story — 0 violations, 8 passes',
+        'Automated focus interaction via Storybook play functions',
+        'Refactored accessibility styles into FocusStateTemplate',
+        'PR reviewed and approved by Trendyol core team',
+      ],
+      tags: ['Lit', 'Storybook', 'WCAG 2.1', 'Web Components', 'Accessibility'],
+      link: 'https://github.com/Trendyol/baklava/pull/1153',
+    },
+    healthcare: {
+      badge: '🏆 TEKNOFEST Finalist · 5,393 teams', badgeClass: 'bo',
+      title: 'AI in Healthcare',
+      sub: 'TEKNOFEST · 2024',
+      desc: 'Developed a two-component hybrid AI system for early breast cancer detection. Selected as finalist among 5,393 competing teams nationwide.',
+      highlights: [
+        'CNN pipeline (ResNet, AlexNet, VGGNet) — 82% BI-RADS accuracy',
+        'BERT-based NLP for radiology report semantic extraction',
+        'Ensemble learning and fine-tuning for improved precision',
+        'Hybrid diagnostic support combining image + text analysis',
+      ],
+      tags: ['PyTorch', 'BERT', 'CNN', 'ResNet', 'Python', 'OpenCV', 'NLP'],
+      link: 'https://github.com/irem-kaya/mamografi_analizi',
+    },
+    iob: {
+      badge: 'TÜBİTAK 2209-A · Funded', badgeClass: 'bp',
+      title: 'IoB Customer Analysis',
+      sub: 'TÜBİTAK 2209-A · 2024–2025',
+      desc: 'Funded research project analyzing the relationship between weather conditions and consumer behavior in the food sector using the Internet of Behaviors (IoB) framework.',
+      highlights: [
+        'Real-time weather data ingestion and ETL pipeline in Python',
+        'Demand forecasting model for food sector inventory optimization',
+        'Statistical correlation analysis between IoB variables',
+        'Data-driven decision support system for strategic management',
+      ],
+      tags: ['Python', 'Pandas', 'Scikit-learn', 'ETL', 'Statistical Analysis', 'IoB'],
+      link: 'https://github.com/irem-kaya',
+    },
+    news: {
+      badge: '🏆 AA Hackathon Finalist', badgeClass: 'bo',
+      title: 'Autonomous News Agent',
+      sub: 'Anadolu Agency Hackathon · 2024',
+      desc: 'Built an end-to-end autonomous news automation system in 48 hours. Finalist at the Anadolu Agency Media Technologies Hackathon.',
+      highlights: [
+        'AI agent using ChatGPT API for news summarization',
+        'BeautifulSoup web scraping module for real-time data collection',
+        'NLP-based content editing and publishing workflow',
+        'Full UI for editorial review and content management',
+      ],
+      tags: ['Python', 'ChatGPT API', 'BeautifulSoup', 'NLP', 'Web Scraping'],
+      link: 'https://github.com/irem-kaya',
+    },
+    aws: {
+      badge: 'Shipped · 2025', badgeClass: 'bt',
+      title: 'AWS Serverless Blog API',
+      sub: 'Personal Project · 2025',
+      desc: 'Fully serverless REST API built on AWS infrastructure with containerized local development using LocalStack. Infrastructure as Code for automated deployment.',
+      highlights: [
+        'Lambda + API Gateway + DynamoDB serverless architecture',
+        'LocalStack for containerized local cloud environment',
+        'Terraform IaC for fully automated deployment',
+        'Docker Compose for consistent dev environment',
+      ],
+      tags: ['AWS', 'Lambda', 'DynamoDB', 'API Gateway', 'Docker', 'Terraform', 'IaC'],
+      link: 'https://github.com/irem-kaya/LogQueryAI',
+    },
+    library: {
+      badge: 'Shipped', badgeClass: 'bt',
+      title: 'Library Management System',
+      sub: 'Academic Project',
+      desc: 'Full-featured library automation system with Code First database design, user authentication, and role-based access control.',
+      highlights: [
+        'Code First approach with Entity Framework migrations',
+        'Identity framework for secure user auth and role management',
+        'Full CRUD operations for books, members, and loans',
+        'Admin panel with reporting and management dashboard',
+      ],
+      tags: ['C#', 'ASP.NET MVC', 'Entity Framework', 'SQL Server', 'Identity'],
+      link: 'https://github.com/irem-kaya',
+    },
+  };
+
+  document.querySelectorAll('.pc[data-modal]').forEach(card => {
+    card.addEventListener('click', () => {
+      const p = projects[card.dataset.modal];
+      if (!p) return;
+      document.getElementById('mBadge').textContent = p.badge;
+      document.getElementById('mBadge').className = 'modal-badge ' + p.badgeClass;
+      document.getElementById('mTitle').textContent = p.title;
+      document.getElementById('mSub').textContent = p.sub;
+      document.getElementById('mDesc').textContent = p.desc;
+      document.getElementById('mHighlights').innerHTML = p.highlights.map(h => `<li>${h}</li>`).join('');
+      document.getElementById('mTags').innerHTML = p.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
+      document.getElementById('mLink').href = p.link;
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  window.closeModal = (e, force) => {
+    if (force || (e && e.target === document.getElementById('modalOverlay'))) {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  };
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal(null, true);
+  });
+  const roleConfig = {
+    data:     { tag:'Data Engineering · New Grad',      termRole:'"Data Engineering & AI"',  desc:'Seeking opportunities in <strong>Data Engineering & Analytics</strong>.', badge:'DATA',    roles:['all','data'] },
+    ai:       { tag:'AI / Machine Learning · New Grad', termRole:'"AI / Machine Learning"',  desc:'Passionate about <strong>AI/ML systems</strong> in production.',          badge:'AI/ML',   roles:['all','ai'] },
+    software: { tag:'Software Engineering · New Grad',  termRole:'"Software Engineering"',   desc:'Building <strong>cloud infrastructure and backend systems</strong>.',      badge:'SOFTWARE',roles:['all','software'] },
+    product:  { tag:'Product Management · New Grad',    termRole:'"Product Management"',     desc:'Bridging tech and users for <strong>data-driven decisions</strong>.',      badge:'PRODUCT', roles:['all','product'] },
+  };
+
+  const role = new URLSearchParams(window.location.search).get('role');
+  const cfg = role && roleConfig[role] ? roleConfig[role] : null;
+
+  if (cfg) {
+    document.getElementById('heroTag').textContent = cfg.tag;
+    const b = document.getElementById('roleBadge'); b.textContent = cfg.badge; b.classList.add('show');
+    const d = document.getElementById('roleDesc'); d.innerHTML = cfg.desc; d.classList.add('show');
+    document.querySelectorAll('.pc').forEach(c => {
+      c.classList.toggle('hide', !cfg.roles.some(r => c.dataset.roles.split(' ').includes(r)));
+    });
+    typeTerminal(cfg.termRole);
+  } else {
+    typeTerminal('"Data Engineering & AI"');
+  }
+});
+</script>
+
+<!-- ══ MODALS ══ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" onclick="closeModal(null, true)">✕</button>
+    <div class="modal-header">
+      <span class="modal-badge" id="mBadge"></span>
+      <div class="modal-title" id="mTitle"></div>
+      <div class="modal-sub" id="mSub"></div>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc" id="mDesc"></p>
+      <div class="modal-section-title">Key Highlights</div>
+      <ul class="modal-highlights" id="mHighlights"></ul>
+      <hr class="modal-divider">
+      <div class="modal-section-title" style="margin-bottom:10px">Tech Stack</div>
+      <div class="modal-tags" id="mTags"></div>
+      <a class="modal-link" id="mLink" href="#" target="_blank">View on GitHub →</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
