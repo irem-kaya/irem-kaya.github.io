@@ -461,7 +461,7 @@ footer{padding:30px 0;border-top:1px solid var(--border);display:flex;justify-co
         <p class="ct-sub rv d2">Open to data-driven, large-scale product teams.</p>
       </div>
       <div class="ct-links rv d1">
-        <a class="ct-lnk" href="/cdn-cgi/l/email-protection#f49d8691999a81869f958d95c2c5b49399959d98da979b99"><span class="__cf_email__" data-cfemail="1f766d7a72716a6d747e667e292e5f78727e7673317c7072">[email&#160;protected]</span><span>Email →</span></a>
+        <a class="ct-lnk" id="emailLink" href="#"><span id="emailText">iremnurkaya61@gmail.com</span><span>Email →</span></a>
         <a class="ct-lnk" href="https://linkedin.com/in/kayyirrem" target="_blank">linkedin.com/in/kayyirrem<span>LinkedIn →</span></a>
         <a class="ct-lnk" href="https://github.com/irem-kaya" target="_blank">github.com/irem-kaya<span>GitHub →</span></a>
         <a class="ct-lnk" href="irem_nur_kaya_cv.pdf" download="Irem_Nur_Kaya_CV.pdf">Download CV<span>↓ PDF</span></a>
@@ -479,6 +479,15 @@ footer{padding:30px 0;border-top:1px solid var(--border);display:flex;justify-co
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 document.addEventListener('DOMContentLoaded', () => {
+
+
+  // Set email link via JS to avoid encoding issues
+  const u = 'iremnurkaya61';
+  const d = 'gmail.com';
+  const el = document.getElementById('emailLink');
+  const et = document.getElementById('emailText');
+  if(el){ el.href = 'mailto:' + u + '@' + d; }
+  if(et){ et.textContent = u + '@' + d; }
 
   // ── NAV scroll effect
   const nav = document.getElementById('nav');
