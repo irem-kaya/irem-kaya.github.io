@@ -54,31 +54,21 @@ nav .inner{max-width:1080px;margin:0 auto;padding:0 40px;display:flex;justify-co
 
 .wrap{max-width:1080px;margin:0 auto;padding:0 40px}
 
-/* ══ HERO ══ */
+/* HERO */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:center;padding-top:64px;position:relative;overflow:hidden}
-
-/* subtle grid */
 .hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:72px 72px;opacity:.2;pointer-events:none}
-
-/* glow */
 .hero-glow{position:absolute;top:50%;left:25%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,230,118,.12) 0%,transparent 65%);pointer-events:none;z-index:0}
-
 .hero-left{padding:80px 48px 80px 40px;position:relative;z-index:1}
 .hero-right{position:relative;z-index:1;padding:80px 40px 80px 48px;border-left:1px solid var(--border)}
-
 .hero-eyebrow{font-family:var(--fm);font-size:11px;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;opacity:0;animation:fadeUp .6s .1s forwards}
 .hero-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--accent);flex-shrink:0}
-
 .hero-name{font-family:var(--fd);font-weight:900;font-size:clamp(56px,6.5vw,108px);line-height:.88;letter-spacing:-4px;margin-bottom:16px;opacity:0;animation:fadeUp .7s .2s forwards;color:var(--text)}
 .hero-name .italic{font-style:italic;font-weight:300;color:var(--muted);display:block}
-
 .hero-sub{font-size:15px;color:var(--muted);max-width:420px;line-height:1.7;font-weight:300;margin-bottom:24px;opacity:0;animation:fadeUp .7s .35s forwards}
 .hero-sub strong{color:var(--text);font-weight:500}
 .role-extra{display:none}
 .role-extra.show{display:block;margin-top:10px;color:var(--accent);font-size:14px}
-
 .hero-ctas{display:flex;gap:10px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .5s forwards}
-
 .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;font-family:var(--fs);font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .25s;letter-spacing:.2px}
 .btn-green{background:var(--accent);color:var(--ad)}
 .btn-green:hover{background:#1af077;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,230,118,.25)}
@@ -198,14 +188,40 @@ footer{padding:30px 0;border-top:1px solid var(--border);display:flex;justify-co
 }
 
 /* ══ MODAL ══ */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.85);
+  z-index:1000;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
 .modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--bg2);border:1px solid var(--border);max-width:680px;width:100%;max-height:90vh;overflow-y:auto;position:relative;transform:translateY(20px);transition:transform .3s}
+.modal{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  max-width:680px;width:100%;
+  max-height:90vh;overflow-y:auto;
+  position:relative;
+  transform:translateY(20px);
+  transition:transform .3s;
+}
 .modal-overlay.open .modal{transform:none}
-.modal-close{position:absolute;top:16px;right:20px;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1;transition:color .2s;z-index:2}
+.modal-close{
+  position:absolute;top:16px;right:20px;
+  background:none;border:none;
+  color:var(--muted);font-size:22px;
+  cursor:pointer;line-height:1;
+  transition:color .2s;z-index:2;
+}
 .modal-close:hover{color:var(--text)}
 .modal-header{padding:32px 32px 0}
-.modal-badge{font-family:var(--fm);font-size:10px;padding:3px 9px;border:1px solid;display:inline-block;margin-bottom:14px;letter-spacing:.4px}
+.modal-badge{
+  font-family:var(--fm);font-size:10px;
+  padding:3px 9px;border:1px solid;
+  display:inline-block;margin-bottom:14px;letter-spacing:.4px;
+}
 .modal-title{font-family:var(--fd);font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--text);margin-bottom:8px}
 .modal-sub{font-family:var(--fm);font-size:11px;color:var(--accent);margin-bottom:20px;letter-spacing:.3px}
 .modal-body{padding:0 32px 32px}
@@ -214,7 +230,13 @@ footer{padding:30px 0;border-top:1px solid var(--border);display:flex;justify-co
 .modal-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
 .modal-tag{font-family:var(--fm);font-size:11px;padding:4px 10px;background:var(--card);color:var(--muted);border:1px solid var(--border)}
 .modal-divider{border:none;border-top:1px solid var(--border);margin:20px 0}
-.modal-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--fm);font-size:12px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--aborder);padding-bottom:2px;transition:border-color .2s}
+.modal-link{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--fm);font-size:12px;
+  color:var(--accent);text-decoration:none;
+  border-bottom:1px solid var(--aborder);
+  padding-bottom:2px;transition:border-color .2s;
+}
 .modal-link:hover{border-color:var(--accent)}
 .modal-highlights{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
 .modal-highlights li{font-size:13px;color:var(--muted);padding-left:16px;position:relative;font-weight:300}
@@ -241,7 +263,6 @@ footer{padding:30px 0;border-top:1px solid var(--border);display:flex;justify-co
   <div class="hero-glow"></div>
   <div class="wrap" style="display:contents">
 
-  <!-- LEFT -->
   <div class="hero-left">
     <div class="hero-eyebrow" id="heroTag">Data Engineering &amp; AI · New Grad</div>
     <h1 class="hero-name">İrem<br>Nur<br><span class="italic">Kaya.</span></h1>
@@ -255,7 +276,6 @@ footer{padding:30px 0;border-top:1px solid var(--border);display:flex;justify-co
     </div>
   </div>
 
-  <!-- RIGHT — TERMINAL -->
   <div class="hero-right">
     <div class="hero-term">
       <div class="terminal">
@@ -461,7 +481,9 @@ footer{padding:30px 0;border-top:1px solid var(--border);display:flex;justify-co
         <p class="ct-sub rv d2">Open to data-driven, large-scale product teams.</p>
       </div>
       <div class="ct-links rv d1">
-        <a class="ct-lnk" id="emailLink" href="#"><span id="emailText">iremnurkaya61@gmail.com</span><span>Email →</span></a>
+        <a class="ct-lnk" id="emailLink" href="#">
+          <span id="emailText">iremnurkaya61@gmail.com</span><span>Email →</span>
+        </a>
         <a class="ct-lnk" href="https://linkedin.com/in/kayyirrem" target="_blank">linkedin.com/in/kayyirrem<span>LinkedIn →</span></a>
         <a class="ct-lnk" href="https://github.com/irem-kaya" target="_blank">github.com/irem-kaya<span>GitHub →</span></a>
         <a class="ct-lnk" href="irem_nur_kaya_cv.pdf" download="Irem_Nur_Kaya_CV.pdf">Download CV<span>↓ PDF</span></a>
@@ -477,27 +499,47 @@ footer{padding:30px 0;border-top:1px solid var(--border);display:flex;justify-co
   </footer>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<!-- ══ MODAL ══ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" id="modalCloseBtn">✕</button>
+    <div class="modal-header">
+      <span class="modal-badge" id="mBadge"></span>
+      <div class="modal-title" id="mTitle"></div>
+      <div class="modal-sub" id="mSub"></div>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc" id="mDesc"></p>
+      <div class="modal-section-title">Key Highlights</div>
+      <ul class="modal-highlights" id="mHighlights"></ul>
+      <div class="modal-section-title">Tech Stack</div>
+      <div class="modal-tags" id="mTags"></div>
+      <hr class="modal-divider">
+      <div class="modal-section-title">GitHub</div>
+      <a class="modal-link" id="mLink" href="#" target="_blank">View on GitHub →</a>
+    </div>
+  </div>
+</div>
+
+<script>
 document.addEventListener('DOMContentLoaded', () => {
 
-
-  // Set email link via JS to avoid encoding issues
-  const u = 'iremnurkaya61';
-  const d = 'gmail.com';
+  // Email
+  const u = 'iremnurkaya61', d = 'gmail.com';
   const el = document.getElementById('emailLink');
   const et = document.getElementById('emailText');
-  if(el){ el.href = 'mailto:' + u + '@' + d; }
-  if(et){ et.textContent = u + '@' + d; }
+  if(el) el.href = 'mailto:' + u + '@' + d;
+  if(et) et.textContent = u + '@' + d;
 
-  // ── NAV scroll effect
+  // Nav scroll
   const nav = document.getElementById('nav');
   const logo = document.getElementById('navLogo');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 60) { nav.classList.add('scrolled'); logo.classList.add('show'); }
-    else { nav.classList.remove('scrolled'); logo.classList.remove('show'); }
+    if(window.scrollY > 60){ nav.classList.add('scrolled'); logo.classList.add('show'); }
+    else{ nav.classList.remove('scrolled'); logo.classList.remove('show'); }
   });
 
-  // ── Typewriter terminal
+  // Terminal typewriter
   const termLines = [
     {t:'p',v:'$ '},{t:'c',v:'cat profile.json'},
     {t:'br'},{t:'b',v:'{'},
@@ -519,15 +561,14 @@ document.addEventListener('DOMContentLoaded', () => {
     body.appendChild(lineEl);
     let i = 0;
     const colorOf = {p:'tp',c:'tc',k:'tk',s:'ts',b:'tb',m:'',sp:''};
-
     function next() {
-      if (i >= lines.length) return;
+      if(i >= lines.length) return;
       const tok = lines[i++];
-      if (tok.t === 'br') {
+      if(tok.t === 'br'){
         lineEl = document.createElement('div');
         body.appendChild(lineEl);
         setTimeout(next, 30);
-      } else if (tok.t === 'cur') {
+      } else if(tok.t === 'cur'){
         const span = document.createElement('span');
         span.className = 'tcursor';
         lineEl.appendChild(span);
@@ -536,24 +577,22 @@ document.addEventListener('DOMContentLoaded', () => {
         typeToken(tok.v, cls, lineEl, next);
       }
     }
-
     function typeToken(text, cls, parent, done) {
       let j = 0;
       const span = cls ? document.createElement('span') : null;
-      if (span) { span.className = cls; parent.appendChild(span); }
+      if(span){ span.className = cls; parent.appendChild(span); }
       const target = span || parent;
       function ch() {
-        if (j >= text.length) { done(); return; }
+        if(j >= text.length){ done(); return; }
         target.textContent += text[j++];
         setTimeout(ch, 18 + Math.random() * 12);
       }
       ch();
     }
-
     setTimeout(next, 400);
   }
 
-  // ── Tabs
+  // Tabs
   document.querySelectorAll('.tab').forEach(btn => {
     btn.addEventListener('click', () => {
       const t = btn.dataset.tab;
@@ -564,127 +603,143 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── Scroll reveal
+  // Scroll reveal
   const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 
-  // ── Project modals
+  // ── PROJECT DATA ──
   const projects = {
     baklava: {
-      badge: '🧩 Open Source · Trendyol', badgeClass: 'bg',
-      title: 'Baklava Design System',
-      sub: 'Trendyol · Feb 2025',
-      desc: 'Contributed to Trendyol\'s open-source UI component library used across millions of users. Implemented a WCAG 2.1 compliant focus state story for the bl-button component.',
-      highlights: [
+      badge:'🧩 Open Source · Trendyol', badgeClass:'bg',
+      title:'Baklava Design System',
+      sub:'Trendyol · Feb 2025',
+      desc:'Contributed to Trendyol\'s open-source UI component library used across millions of users. Implemented a WCAG 2.1 compliant focus state story for the bl-button component.',
+      highlights:[
         'WCAG 2.1 focus state story — 0 violations, 8 passes',
         'Automated focus interaction via Storybook play functions',
         'Refactored accessibility styles into FocusStateTemplate',
         'PR reviewed and approved by Trendyol core team',
       ],
-      tags: ['Lit', 'Storybook', 'WCAG 2.1', 'Web Components', 'Accessibility'],
-      link: 'https://github.com/Trendyol/baklava/pull/1153',
+      tags:['Lit','Storybook','WCAG 2.1','Web Components','Accessibility'],
+      link:'https://github.com/Trendyol/baklava/pull/1153',
     },
     healthcare: {
-      badge: '🏆 TEKNOFEST Finalist · 5,393 teams', badgeClass: 'bo',
-      title: 'AI in Healthcare',
-      sub: 'TEKNOFEST · 2024',
-      desc: 'Developed a two-component hybrid AI system for early breast cancer detection. Selected as finalist among 5,393 competing teams nationwide.',
-      highlights: [
+      badge:'🏆 TEKNOFEST Finalist · 5,393 teams', badgeClass:'bo',
+      title:'AI in Healthcare',
+      sub:'TEKNOFEST · 2024',
+      desc:'Developed a two-component hybrid AI system for early breast cancer detection. Selected as finalist among 5,393 competing teams nationwide.',
+      highlights:[
         'CNN pipeline (ResNet, AlexNet, VGGNet) — 82% BI-RADS accuracy',
         'BERT-based NLP for radiology report semantic extraction',
         'Ensemble learning and fine-tuning for improved precision',
         'Hybrid diagnostic support combining image + text analysis',
       ],
-      tags: ['PyTorch', 'BERT', 'CNN', 'ResNet', 'Python', 'OpenCV', 'NLP'],
-      link: 'https://github.com/irem-kaya/mamografi_analizi',
+      tags:['PyTorch','BERT','CNN','ResNet','Python','OpenCV','NLP'],
+      link:'https://github.com/irem-kaya/mamografi_analizi',
     },
     iob: {
-      badge: 'TÜBİTAK 2209-A · Funded', badgeClass: 'bp',
-      title: 'IoB Customer Analysis',
-      sub: 'TÜBİTAK 2209-A · 2024–2025',
-      desc: 'Funded research project analyzing the relationship between weather conditions and consumer behavior in the food sector using the Internet of Behaviors (IoB) framework.',
-      highlights: [
+      badge:'TÜBİTAK 2209-A · Funded', badgeClass:'bp',
+      title:'IoB Customer Analysis',
+      sub:'TÜBİTAK 2209-A · 2024–2025',
+      desc:'Funded research project analyzing the relationship between weather conditions and consumer behavior in the food sector using the Internet of Behaviors (IoB) framework.',
+      highlights:[
         'Real-time weather data ingestion and ETL pipeline in Python',
         'Demand forecasting model for food sector inventory optimization',
         'Statistical correlation analysis between IoB variables',
         'Data-driven decision support system for strategic management',
       ],
-      tags: ['Python', 'Pandas', 'Scikit-learn', 'ETL', 'Statistical Analysis', 'IoB'],
-      link: 'https://github.com/irem-kaya',
+      tags:['Python','Pandas','Scikit-learn','ETL','Statistical Analysis','IoB'],
+      link:'https://github.com/irem-kaya',
     },
     news: {
-      badge: '🏆 AA Hackathon Finalist', badgeClass: 'bo',
-      title: 'Autonomous News Agent',
-      sub: 'Anadolu Agency Hackathon · 2024',
-      desc: 'Built an end-to-end autonomous news automation system in 48 hours. Finalist at the Anadolu Agency Media Technologies Hackathon.',
-      highlights: [
+      badge:'🏆 AA Hackathon Finalist', badgeClass:'bo',
+      title:'Autonomous News Agent',
+      sub:'Anadolu Agency Hackathon · 2024',
+      desc:'Built an end-to-end autonomous news automation system in 48 hours. Finalist at the Anadolu Agency Media Technologies Hackathon.',
+      highlights:[
         'AI agent using ChatGPT API for news summarization',
         'BeautifulSoup web scraping module for real-time data collection',
         'NLP-based content editing and publishing workflow',
         'Full UI for editorial review and content management',
       ],
-      tags: ['Python', 'ChatGPT API', 'BeautifulSoup', 'NLP', 'Web Scraping'],
-      link: 'https://github.com/irem-kaya',
+      tags:['Python','ChatGPT API','BeautifulSoup','NLP','Web Scraping'],
+      link:'https://github.com/irem-kaya',
     },
     aws: {
-      badge: 'Shipped · 2025', badgeClass: 'bt',
-      title: 'AWS Serverless Blog API',
-      sub: 'Personal Project · 2025',
-      desc: 'Fully serverless REST API built on AWS infrastructure with containerized local development using LocalStack. Infrastructure as Code for automated deployment.',
-      highlights: [
+      badge:'Shipped · 2025', badgeClass:'bt',
+      title:'AWS Serverless Blog API',
+      sub:'Personal Project · 2025',
+      desc:'Fully serverless REST API built on AWS infrastructure with containerized local development using LocalStack. Infrastructure as Code for automated deployment.',
+      highlights:[
         'Lambda + API Gateway + DynamoDB serverless architecture',
         'LocalStack for containerized local cloud environment',
         'Terraform IaC for fully automated deployment',
         'Docker Compose for consistent dev environment',
       ],
-      tags: ['AWS', 'Lambda', 'DynamoDB', 'API Gateway', 'Docker', 'Terraform', 'IaC'],
-      link: 'https://github.com/irem-kaya/LogQueryAI',
+      tags:['AWS','Lambda','DynamoDB','API Gateway','Docker','Terraform','IaC'],
+      link:'https://github.com/irem-kaya/LogQueryAI',
     },
     library: {
-      badge: 'Shipped', badgeClass: 'bt',
-      title: 'Library Management System',
-      sub: 'Academic Project',
-      desc: 'Full-featured library automation system with Code First database design, user authentication, and role-based access control.',
-      highlights: [
+      badge:'Shipped', badgeClass:'bt',
+      title:'Library Management System',
+      sub:'Academic Project',
+      desc:'Full-featured library automation system with Code First database design, user authentication, and role-based access control.',
+      highlights:[
         'Code First approach with Entity Framework migrations',
         'Identity framework for secure user auth and role management',
         'Full CRUD operations for books, members, and loans',
         'Admin panel with reporting and management dashboard',
       ],
-      tags: ['C#', 'ASP.NET MVC', 'Entity Framework', 'SQL Server', 'Identity'],
-      link: 'https://github.com/irem-kaya',
+      tags:['C#','ASP.NET MVC','Entity Framework','SQL Server','Identity'],
+      link:'https://github.com/irem-kaya',
     },
   };
 
+  // ── MODAL LOGIC ──
+  const overlay = document.getElementById('modalOverlay');
+  const closeBtn = document.getElementById('modalCloseBtn');
+
+  function openModal(key) {
+    const p = projects[key];
+    if(!p) return;
+    document.getElementById('mBadge').textContent = p.badge;
+    document.getElementById('mBadge').className = 'modal-badge ' + p.badgeClass;
+    document.getElementById('mTitle').textContent = p.title;
+    document.getElementById('mSub').textContent = p.sub;
+    document.getElementById('mDesc').textContent = p.desc;
+    document.getElementById('mHighlights').innerHTML = p.highlights.map(h => `<li>${h}</li>`).join('');
+    document.getElementById('mTags').innerHTML = p.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
+    document.getElementById('mLink').href = p.link;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Card clicks
   document.querySelectorAll('.pc[data-modal]').forEach(card => {
-    card.addEventListener('click', () => {
-      const p = projects[card.dataset.modal];
-      if (!p) return;
-      document.getElementById('mBadge').textContent = p.badge;
-      document.getElementById('mBadge').className = 'modal-badge ' + p.badgeClass;
-      document.getElementById('mTitle').textContent = p.title;
-      document.getElementById('mSub').textContent = p.sub;
-      document.getElementById('mDesc').textContent = p.desc;
-      document.getElementById('mHighlights').innerHTML = p.highlights.map(h => `<li>${h}</li>`).join('');
-      document.getElementById('mTags').innerHTML = p.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
-      document.getElementById('mLink').href = p.link;
-      document.getElementById('modalOverlay').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    });
+    card.addEventListener('click', () => openModal(card.dataset.modal));
   });
 
-  window.closeModal = (e, force) => {
-    if (force || (e && e.target === document.getElementById('modalOverlay'))) {
-      document.getElementById('modalOverlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  };
+  // Close button
+  closeBtn.addEventListener('click', closeModal);
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal(null, true);
+  // Click outside modal box
+  overlay.addEventListener('click', (e) => {
+    if(e.target === overlay) closeModal();
   });
+
+  // ESC key
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeModal();
+  });
+
+  // Role config
   const roleConfig = {
     data:     { tag:'Data Engineering · New Grad',      termRole:'"Data Engineering & AI"',  desc:'Seeking opportunities in <strong>Data Engineering & Analytics</strong>.', badge:'DATA',    roles:['all','data'] },
     ai:       { tag:'AI / Machine Learning · New Grad', termRole:'"AI / Machine Learning"',  desc:'Passionate about <strong>AI/ML systems</strong> in production.',          badge:'AI/ML',   roles:['all','ai'] },
@@ -695,7 +750,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const role = new URLSearchParams(window.location.search).get('role');
   const cfg = role && roleConfig[role] ? roleConfig[role] : null;
 
-  if (cfg) {
+  if(cfg) {
     document.getElementById('heroTag').textContent = cfg.tag;
     const b = document.getElementById('roleBadge'); b.textContent = cfg.badge; b.classList.add('show');
     const d = document.getElementById('roleDesc'); d.innerHTML = cfg.desc; d.classList.add('show');
@@ -706,21 +761,8 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     typeTerminal('"Data Engineering & AI"');
   }
+
 });
 </script>
-
-<!-- ══ MODALS ══ -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" id="modalBox">
-    <button class="modal-close" onclick="closeModal(null, true)">✕</button>
-    <div class="modal-header">
-      <span class="modal-badge" id="mBadge"></span>
-      <div class="modal-title" id="mTitle"></div>
-      <div class="modal-sub" id="mSub"></div>
-    </div>
-    <div class="modal-body">
-      <p class="modal-desc" id="mDesc"></p>
-      <div class="modal-section-title">Key Highlights</div>
-      <ul class="modal-highlights" id="mHighlights"></ul>
-      <hr class="modal-divider">
-      <div
+</body>
+</html>
